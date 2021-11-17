@@ -177,7 +177,8 @@ struct cmd_info proto_cmd_info[] = {
  {"SCRIPT_LOAD", 0, 0, 0, 0, 0, false, false, false, -1, -1, -1, -1, -1, -1, NULL, 0, 0},
  {"SCRIPT_EXISTS", 0, 0, 0, 0, 0, false, false, false, -1, -1, -1, -1, -1, -1, NULL, 0, 0},
  {"SCRIPT_FLUSH", 0, 0, 0, 0, 0, false, false, false, -1, -1, -1, -1, -1, -1, NULL, 0, 0},
- {"SCRIPT_KILL", 0, 0, 0, 0, 0, false, false, false, -1, -1, -1, -1, -1, -1, NULL, 0, 0}
+ {"SCRIPT_KILL", 0, 0, 0, 0, 0, false, false, false, -1, -1, -1, -1, -1, -1, NULL, 0, 0},
+ {"SELECT", 0, 0, 0, 0, 0, false, false, false, -1, -1, -1, -1, -1, -1, NULL, 0, 0}
 
  // Ignore RSP msg types.
 };

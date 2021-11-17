@@ -89,3 +89,4 @@ cscope.out
 /test/_binaries/*
 /test/_binaries
 /test/conf
+.nova*

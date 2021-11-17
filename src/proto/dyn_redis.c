@@ -136,6 +136,7 @@ static bool redis_arg1(struct msg *r) {
     case MSG_REQ_REDIS_CONFIG:
     case MSG_REQ_REDIS_SCRIPT_LOAD:
     case MSG_REQ_REDIS_SCRIPT_EXISTS:
+	case MSG_REQ_REDIS_SELECT:
 
       return true;
 
@@ -1199,6 +1200,11 @@ void redis_parse_req(struct msg *r, struct context *ctx) {
               r->is_read = 0;
               break;
             }
+			if (str6icmp(m, 's', 'e', 'l', 'e', 'c', 't')) {
+			  r->type = MSG_REQ_REDIS_SELECT;
+			  r->is_read = 1;
+			  break;
+			}
             break;
 
           case 7:
@@ -1737,6 +1743,9 @@ void redis_parse_req(struct msg *r, struct context *ctx) {
               }
               goto done;
             } else if (redis_arg1(r)) {
+              if (r->type == MSG_REQ_REDIS_SELECT) {
+			    goto done;
+              }
               if (r->rntokens != 1) {
                 goto error;
               }
@@ -2349,7 +2358,9 @@ void redis_parse_req(struct msg *r, struct context *ctx) {
   return;
 
 done:
-  ASSERT(r->type > MSG_UNKNOWN && r->type < MSG_SENTINEL);
+  if (r->type != MSG_REQ_REDIS_SELECT) {
+  	ASSERT(r->type > MSG_UNKNOWN && r->type < MSG_SENTINEL);
+  }
   r->pos = p + 1;
   ASSERT(r->pos <= b->last);
   r->state = SW_START;

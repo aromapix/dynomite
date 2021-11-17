@@ -222,7 +222,7 @@
   ACTION(SENTINEL)                                                             \
   ACTION(END_IDX)                                                              \
   /* ACTION( REQ_REDIS_AUTH) */                                                \
-  /* ACTION( REQ_REDIS_SELECT)*/ /* only during init */                        \
+  ACTION(REQ_REDIS_SELECT) /* only during init */                        \
 
 #define DEFINE_ACTION(_name) MSG_##_name,
 typedef enum msg_type { MSG_TYPE_CODEC(DEFINE_ACTION) } msg_type_t;
